@@ -41,6 +41,7 @@ class PostsController extends Controller
     public function filter_cat($id){
         $posts = Category::find($id)->posts()->paginate(15);
         $category = Category::find($id)->name;
+        
         return view('blog.index', ['posts' => $posts], ['category' => $category]);
     }
 
