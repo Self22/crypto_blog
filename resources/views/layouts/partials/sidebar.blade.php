@@ -17,6 +17,9 @@
       <li class="nav-item">
         <a class="nav-link" href="{{route('tags.index')}}"><i class="icon-calculator"></i> Tags</a>
       </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('settings')}}"><i class="icon-calculator"></i> Settings</a>
+        </li>
     </ul>
   </nav>
 

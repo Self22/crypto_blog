@@ -42,17 +42,28 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="disabled-input">Post Slug</label>
+                                    <label class="col-md-3 col-form-label" for="title">Post SEO-Title</label>
                                     <div class="col-md-9">
-                                        <input type="text" id="disabled-input" name="disabled-input" class="form-control" value="{{ $post->slug }}" disabled="">
+                                        <input type="text" id="title" name="seo_title" class="form-control" value="{{ $post->seo_title }}">
+                                        <span class="help-block">Enter Post SEO-Title</span>
                                     </div>
                                 </div>
+
                                 <div class="form-group row">
                                     <label class="col-md-3 col-form-label" for="content">Post Content</label>
                                     <div class="col-md-9">
                                         <textarea id="content" name="content" rows="9" class="form-control">{{ $post->content }}</textarea>
                                     </div>
                                 </div>
+                                <br>
+                                <div class="form-group row">
+                                    <label class="col-md-3 col-form-label" for="">Post Picture</label>
+                                    <img  class="col-md-6 offset-6" src="{{ $post->picture_name }}">
+                                    <div class="col-md-9 offset-3">
+                                        <input type="file" name="image">
+                                    </div>
+                                </div>
+                                <br>
                                 <div class="form-group row">
                                     <label class="col-md-3 col-form-label" for="category_id">Post Category</label>
                                     <div class="col-md-9">

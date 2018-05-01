@@ -1,21 +1,18 @@
 @extends('layouts.blog')
 
-@section('meta')
+
+
+@section('header')
+    <img src="img/logo_hg.png" alt="">
+        
 @endsection
-
-@section('title')
-@endsection
-
-        {{--<!-- Page Heading/Breadcrumbs -->--}}
+        
 
 
 
 
 
 
-<div class="container-fluid header__logo">
-    <h1 class="title__logo">CryptoBlog</h1>
-</div>
 
 
 @section('content')

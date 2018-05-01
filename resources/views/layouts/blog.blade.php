@@ -1,19 +1,31 @@
 @extends('layouts.app')
 
-    {{--Styles--}}
-    @section('styles')
-        <!-- Bootstrap core CSS -->
-    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+@section('head')
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- Custom styles for this template -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
-        <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
-        <link href="/css/styles.css" rel="stylesheet">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
+
+        <title>{{ $title }}</title>
+
+
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
+    <link href="/css/styles.css" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @endsection
 
+
+
+
+
     {{--Head--}}
-    @section('head')
+    @section('header')
     @endsection
     
     @section('navigation')
@@ -23,10 +35,10 @@
     {{--Page--}}
     
     @section('page')
-       <div class="row">
+
           @yield('content')
           @yield('sidebar')
-       </div>
+
     @endsection
 
     @section('footer')

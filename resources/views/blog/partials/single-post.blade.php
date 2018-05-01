@@ -1,5 +1,5 @@
 <!-- Preview Image -->
-<img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
+<img class="img-fluid rounded" src="{{$post->picture_name}}" alt="">
 
 <hr>
 
@@ -7,7 +7,7 @@
 <p>Posted on {{ date('d F Y', strtotime($post->created_at)) }}</p>
 
 <hr>
-Category: <button type="button" class="btn btn-outline-success">{{ $post->category->name }}</button>
+Category: <a href="{{ route('category.filter', ['id'=> $post->category->id]) }}">{{ $post->category->name }}</a>
 <!-- Post Content -->
 <p class="lead">{{ $post->content }}</p>
 <ul class="list-group">

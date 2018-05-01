@@ -50,6 +50,13 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
+                                    <label class="col-md-3 col-form-label" for="title">Page Title (SEO)</label>
+                                    <div class="col-md-9">
+                                        <input type="text" id="title" name="seo_title" class="form-control" placeholder="Page Title (SEO)">
+                                        <span class="help-block">Enter Page Title (SEO)</span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
                                     <label class="col-md-3 col-form-label" for="content">Post Content</label>
                                     <div class="col-md-9">
                                         <textarea id="content" name="content" rows="9" class="form-control" placeholder="Content.."></textarea>

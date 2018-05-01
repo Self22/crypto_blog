@@ -22,6 +22,10 @@
                             <label for="title">Name</label>
                             <input name="name" class="form-control" type="text" value="" required>
                         </div>
+                        <div class="form-group">
+                            <label for="title">Page Title</label>
+                            <input name="title_page" class="form-control" type="text" value="" required>
+                        </div>
                     </div>
                     <div class="card-footer text-muted">
                         <div class="pull-right">

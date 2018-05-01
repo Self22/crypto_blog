@@ -14,7 +14,7 @@
 /// user routes
 
 Route::get('/', 'PostsController@index')->name('blog');
-Route::get('blog.show/{id}', 'PostsController@show')->name('blog.show');
+Route::get('blog.show/{slug}', 'PostsController@show')->name('blog.show');
 Route::get('category.filter/{id}', 'PostsController@filter_cat')->name('category.filter');
 Route::get('tag.filter/{id}', 'PostsController@filter_tag')->name('tag.filter');
 
@@ -26,14 +26,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('posts', 'Admin\PostsController');
     Route::resource('categories', 'Admin\CategoriesController');
     Route::resource('tags', 'Admin\TagsController');
+    Route::get('settings', 'Admin\SettingsController@edit')->name('settings');
+    Route::post('settings_update', 'Admin\SettingsController@update')->name('settings.update');;
 });
 ;
-
-
-
-
-
-
 
 
 

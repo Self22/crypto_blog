@@ -31,24 +31,31 @@
                         <div class="table-responsive">
                             <div class="card">
                                 <div class="card-header">
-                                    <b>{{$post->title}}</b>
+                                    <b><h5>Post title:</h5>{{$post->title}}</b>
+                                </div>
+                                <div class="card-header">
+                                    <b><h5>Title SEO:</h5> {{$post->seo_title}}</b>
                                 </div>
                                 <div class="card-block">
+                                    <h5>Post content:</h5>
                                     {!! $post->content !!}
                                 </div>
                                 <div class="card-block">
-
-                                    <img src="../{{$post->picture_name}}" alt="">
+                                    <h5>Post img</h5>
+                                    <img src="{{$post->picture_name}}" alt="">
+                                </div>
+                                <div class="card-block">
+                                    <h5>Post category:</h5>
+                                    {{$category}}
                                 </div>
                                 <div class="form-group">
-                                    <label for="category_id">Select Tags</label>
-                                    <br>
+                                    <div class="card-block">
+                                        <h5>Post tags:</h5>
                                     @foreach($tags as $tag)
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="{{ $tag->id }}">
-                                            <label class="form-check-label" for="inlineCheckbox1">{{ $tag->tag }}</label>
-                                        </div>
+                                        <p>{{$tag->tag}}</p>
+
                                     @endforeach
+
                                 </div>
                                 <div class="card-footer text-muted">
                                     <div class="pull-right">

@@ -24,6 +24,12 @@
                             <input name="name" class="form-control" type="text" value="{{ $category->name }}" required>
                         </div>
                     </div>
+                    <div class="card-block">
+                    <div class="form-group">
+                        <label for="title">Page Title</label>
+                        <input name="title_page" class="form-control" type="text" value="{{ $category->title_page }}" required>
+                    </div>
+                        </div>
                     <div class="card-footer text-muted">
                         <div class="pull-right">
                             <button type="submit" class="btn btn-primary">Save</button>

@@ -58,7 +58,10 @@ class PostsController extends Controller
          $post->title = $request->title;
          $post->content = $request->content;
          $post->category_id = $request->category_id;
+        $post->seo_title = $request->seo_title.' | HashGame';
          $post->is_active = $request->is_active;
+        $post->description = stristr($request->content, '.', true);
+
         $this->validate($request, [
             'title' => 'string|required',
             'content' => 'string|required',
@@ -76,7 +79,6 @@ class PostsController extends Controller
             if(Post::where('picture_name', $filename)->exists()){
                 $filename = time().$filename;
             }
-//            $request->image->storeAs('img', $filename);
             $post->picture_name = 'img/'.$filename;
 
             Image::make($request->file('image'))->resize(300, 300)->save( public_path('img/'. $filename));
@@ -84,8 +86,6 @@ class PostsController extends Controller
 
         }
 
-//        $post = $request->all();
-////        $post = new Post($post);
         $post->save();
         $post->tags()->sync($request->tags, false);
 
@@ -103,7 +103,10 @@ class PostsController extends Controller
     {
         $post = Post::find($id);
         $tags = $post->tags;
-        return view('admin.posts.show')->withPost($post)->withTags($tags);
+        $category = Category::find($post->category_id);
+
+        $category = $category->name;
+        return view('admin.posts.show')->withPost($post)->withTags($tags)->withCategory($category);
     }
 
     /**
@@ -129,7 +132,39 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = Post::find($id);
+        $post->title = $request->title;
+        $post->seo_title = $request->seo_title;
+        $post->content = $request->content;
+        $post->category_id = $request->category_id;
+        $post->is_active = $request->is_active;
+
+        if ($request->hasFile('image') ) {
+
+            $this->validate($request, [
+                'image' => 'image',
+
+            ]);
+
+            $filename = str_replace(' ', '', $_FILES['image']['name']);
+            if(Post::where('picture_name', $filename)->exists()){
+                $filename = time().$filename;
+            }
+            $post->picture_name = 'img/'.$filename;
+
+            Image::make($request->file('image'))->resize(300, 300)->save( public_path('img/'. $filename));
+
+
+        }
+
+        $post->save();
+
+        if (isset($request->tags)) {
+            $post->tags()->sync($request->tags);
+        } else {
+            $post->tags()->sync(array());
+        }
+        return redirect(route('posts.index'))->with('message', 'An article has been updated');
     }
 
     /**
