@@ -10,6 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+/// test routes
+
+Route::get('test', 'ParseController@index');
+
 
 /// user routes
 
@@ -33,6 +37,6 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 
-Auth::routes();
+
 
 Route::get('/home', 'HomeController@index')->name('home');

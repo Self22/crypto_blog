@@ -7,9 +7,11 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    @isset($description)
+    <meta name="description" content="{{ $description }}">
+    @endisset
 
-
-        <title>{{ $title }}</title>
+    <title>{{ $title }}</title>
 
 
 
@@ -36,16 +38,17 @@
     
     @section('page')
 
+
           @yield('content')
           @yield('sidebar')
 
     @endsection
 
-    @section('footer')
-        @include('shared.footer')
-    @endsection
-    
-    {{--Scripts--}}
+@section('footer')
+    @include('shared.footer')
+@endsection
+
+{{--Scripts--}}
 
     @section('scripts')
         <!-- Bootstrap core JavaScript -->

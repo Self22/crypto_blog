@@ -11,7 +11,6 @@
         </div>
 
         <div class="card-footer text-muted">
-            Posted on {{ date('d F Y', strtotime($post->created_at)) }} by &nbsp;
-            <a href="#">  Janus Nic</a>
+            Posted on {{ date('d F Y', strtotime($post->created_at)) }}
         </div>
 </div>  

@@ -2,7 +2,7 @@
   <nav class="sidebar-nav">
     <ul class="nav">
       <li class="nav-item">
-        <a class="nav-link" href="/"><i class="icon-speedometer"></i> Dashboard </a>
+        <a class="nav-link" href="/admin"><i class="icon-speedometer"></i> Dashboard </a>
       </li>
 
       <li class="nav-title">

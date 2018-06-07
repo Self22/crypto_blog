@@ -58,7 +58,7 @@ class PostsController extends Controller
          $post->title = $request->title;
          $post->content = $request->content;
          $post->category_id = $request->category_id;
-        $post->seo_title = $request->seo_title.' | HashGame';
+        $post->seo_title = $request->seo_title.'| HG.IO';
          $post->is_active = $request->is_active;
         $post->description = stristr($request->content, '.', true);
 
@@ -67,6 +67,9 @@ class PostsController extends Controller
             'content' => 'string|required',
         ]);
 
+        if(!($request->hasFile('image'))){
+            $post->picture_name = '';
+        }
 
         if ($request->hasFile('image') ) {
 
@@ -81,7 +84,7 @@ class PostsController extends Controller
             }
             $post->picture_name = 'img/'.$filename;
 
-            Image::make($request->file('image'))->resize(300, 300)->save( public_path('img/'. $filename));
+            Image::make($request->file('image'))->save( public_path('img/'. $filename));
 
 
         }

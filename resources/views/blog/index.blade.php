@@ -17,8 +17,13 @@
 
 @section('content')
         <!-- Blog Entries Column -->
-
+    @isset($h1)
+    <div class="col-md-12">
+    <h1 class="main__h1">{{$h1}}</h1>
+        </div>
+    @endisset
 <div class="col-md-8">
+
     @isset($name)
     <p>All posts with tag: {{($name)}}</p>
     @endisset

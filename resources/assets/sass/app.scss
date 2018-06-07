@@ -18,7 +18,28 @@ body{
 }
 
 .main__header{
-  padding: 10px 0 20px;
-  background: rgb(171, 173, 175);
+  padding: 10px 5% 20px;
+  background: #28323a;
   margin-bottom: 30px;
+}
+
+.main__h1 {
+  font-size: 26px;
+  padding-right: 35%;
+  margin-bottom: 25px;
+}
+
+.post_title{
+  color: white;
+}
+
+.widget-header{
+  background: #F7F7F7;
+  font-size: 20px;
+  padding: 10px 5%;
+  margin-bottom: 0;
+}
+
+.main__footer{
+  background: #28323A !important;
 }

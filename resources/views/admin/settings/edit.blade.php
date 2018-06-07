@@ -30,6 +30,12 @@
                                             <input name="main_h1" class="form-control" type="text" value="{{ $settings->main_h1 }}" required>
                                         </div>
                                     </div>
+                                    <div class="card-block">
+                                        <div class="form-group">
+                                            <label for="title">Main Description</label>
+                                            <input name="main_description" class="form-control" type="text" value="{{ $settings->main_description }}" required>
+                                        </div>
+                                    </div>
                                     <div class="card-footer text-muted">
                                         <div class="pull-right">
                                             <button type="submit" class="btn btn-primary">Save</button>

@@ -1,7 +1,7 @@
 <!-- Tags Widget -->
 @if($data)
     <div class="card my-4">
-        <h5 class="card-header">Tags</h5>
+        <p class="widget-header">Tags</p>
         <div class="card-body">
             <div class="row">
                 <div class="col-lg-6">

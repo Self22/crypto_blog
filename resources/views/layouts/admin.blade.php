@@ -16,8 +16,11 @@
   <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet">
   <!-- Main styles for this application -->
   <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
+
   <!-- Styles required by this views -->
-  <link rel="stylesheet" href="{{ asset('css/custom.css') }}">  
+  <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+
+  <link href="{{ asset('css/summernote-bs4.css') }}" rel="stylesheet">
 </head>
 
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">

@@ -12,12 +12,13 @@
 
         <div class="container">
             <div class="row">
-            @yield('page')
+                @yield('content')
 
             </div>
-            @yield('content')
+
         </div>
     </div>
+    @yield('footer')
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>

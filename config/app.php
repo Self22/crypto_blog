@@ -162,6 +162,7 @@ return [
         App\Providers\WidgetServiceProvider::class,
         App\Providers\BreadcrumsServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Yangqi\Htmldom\HtmldomServiceProvider::class,
 
     ],
 
@@ -213,6 +214,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Breadcrumbs' => App\Helpers\Facades\Breadcrumbs::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'Htmldom' => Yangqi\Htmldom\Htmldom::class,
 
     ],
 
