@@ -3,7 +3,10 @@
 
 
 @section('header')
-    <img src="img/logo_hg.png" alt="">
+    <a href="/" class="headerimg__cont">
+        <img src="{{ asset('img\logo_hg.png') }}" alt="">
+    </a>
+
         
 @endsection
         
@@ -33,9 +36,11 @@
     @each('blog.partials.post', $posts, 'post', 'blog.partials.post-none')
 
             <!-- Pagination -->
+    @if(is_object($posts))
     <div class="pagination justify-content-center mb-4">
          {{ $posts->links() }}
     </div>
+    @endif
 
 </div>
 @include('blog.partials.sidebar')

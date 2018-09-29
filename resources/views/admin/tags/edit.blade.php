@@ -39,6 +39,14 @@
                                             <label for="title">Name</label>
                                             <input name="tag" class="form-control" type="text" value="{{ $tag->tag }}" placeholder="title of article">
                                         </div>
+                                        <div class="form-group">
+                                            <label for="title">Page Title</label>
+                                            <input name="title" class="form-control" type="text" value="{{ $tag->title}}" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="description">Description</label>
+                                            <input name="description" class="form-control" type="text" value="{{ $tag->description }}" required>
+                                        </div>
 
                                     </div>
                                     <div class="card-footer text-muted">

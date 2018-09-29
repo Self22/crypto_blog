@@ -1,0 +1,58 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Image;
+use App\Uniq_Video;
+use App\UniqText;
+use App\Settings;
+use Illuminate\Http\Request;
+
+class UniqueController extends Controller
+{
+    public function index(){
+        $posts = UniqText::orderBy('id', 'desc')->paginate(15);
+        $title = Settings::find(1)->uniq_texts_title;
+        $main_h1 = Settings::find(1)->uniq_texts_h1;
+        $description = Settings::find(1)->uniq_texts_descr;
+        // $posts = Post::simplePaginate(10);
+
+        return view('blog.index')->withPosts($posts)->withTitle($title)->withDescription($description)->withH1($main_h1);
+
+    }
+
+    public function show($slug){
+        $article = UniqText::whereSlug($slug)->firstOrFail();
+        $title = strip_tags($article->anchor);
+        $description = $article->description;
+        return view('blog.show')->withArticle($article)->withTitle($title)->withDescription($description);
+    }
+
+    public function test4(){
+        UniqText::create_uniq_news();
+    }
+
+    public function test6(){
+        UniqText::test_wordai();
+    }
+
+    public function test5(){
+        UniqText::addTagsAndCategoriesToArticles();
+
+    }
+
+    public function clean(){
+        UniqText::clean_text();
+    }
+
+
+    public function add_images_to_database(){
+        Image::add_images_to_database();
+    }
+
+    public function add_video_to_database(){
+        Uniq_Video::add_video_to_database();
+    }
+
+
+}

@@ -2,6 +2,8 @@
 
 namespace App\Console;
 
+use App\ParseLink;
+use App\UniqText;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -24,8 +26,23 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        error_reporting(E_ALL);
+        ini_set('display_errors', 1);
+
+
+        $schedule->call(function () {
+            ParseLink::parse_coindesk();
+        })->hourly();
+
+        $schedule->call(function () {
+            ParseLink::parse_cryptonews();
+        })->hourly();
+
+        $schedule->call(function () {
+            UniqText::create_uniq_news();
+        })->hourly();
+
+
     }
 
     /**

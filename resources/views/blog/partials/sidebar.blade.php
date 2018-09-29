@@ -9,7 +9,13 @@
   <!-- Tags Widget -->
     @widget('tags')
 
-  <!-- Side Widget -->
+  <!-- Link to news -->
 
+  @if (!strpos(url()->current(), 'news.index'))
+  <div class="card my-4">
+    <a href="{{route('blog')}}" class="widget-header">Expert Articles</a>
+
+  </div>
+    @endif
 
 </div>

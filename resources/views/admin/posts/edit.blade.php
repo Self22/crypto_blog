@@ -58,7 +58,9 @@
                                 <br>
                                 <div class="form-group row">
                                     <label class="col-md-3 col-form-label" for="">Post Picture</label>
-                                    <img  class="col-md-6 offset-6" src="{{ $post->picture_name }}">
+                                    <div class="admin__img-cont">
+                                    <img  class="col-md-6 offset-6" src="../../{{ $post->picture_name }}">
+                                    </div>
                                     <div class="col-md-9 offset-3">
                                         <input type="file" name="image">
                                     </div>

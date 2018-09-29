@@ -21,19 +21,37 @@
                                     <div class="card-block">
                                         <div class="form-group">
                                             <label for="title">Main Title</label>
-                                            <input name="main_title" class="form-control" type="text" value="{{ $settings->main_title }}" required>
+                                            <input name="main_title" class="form-control" type="text" value="@isset($settings->main_title){{ $settings->main_title }}@endisset" required>
                                         </div>
                                     </div>
                                     <div class="card-block">
                                         <div class="form-group">
                                             <label for="title">Main H1</label>
-                                            <input name="main_h1" class="form-control" type="text" value="{{ $settings->main_h1 }}" required>
+                                            <input name="main_h1" class="form-control" type="text" value="@isset($settings->main_h1){{ $settings->main_h1 }}@endisset" required>
                                         </div>
                                     </div>
                                     <div class="card-block">
                                         <div class="form-group">
                                             <label for="title">Main Description</label>
-                                            <input name="main_description" class="form-control" type="text" value="{{ $settings->main_description }}" required>
+                                            <input name="main_description" class="form-control" type="text" value="@isset($settings->main_description){{ $settings->main_description }} @endisset" required>
+                                        </div>
+                                    </div>
+                                    <div class="card-block">
+                                        <div class="form-group">
+                                            <label for="title">Unique Parse Articles Index Title</label>
+                                            <input name="uniq_texts_title" class="form-control" type="text" value="@isset($settings->main_description){{ $settings->uniq_texts_title }} @endisset" required>
+                                        </div>
+                                    </div>
+                                    <div class="card-block">
+                                        <div class="form-group">
+                                            <label for="title">Unique Parse Articles Index h1</label>
+                                            <input name="uniq_texts_h1" class="form-control" type="text" value="@isset($settings->main_description){{ $settings->uniq_texts_h1 }} @endisset" required>
+                                        </div>
+                                    </div>
+                                    <div class="card-block">
+                                        <div class="form-group">
+                                            <label for="title">Unique Parse Articles Index Description</label>
+                                            <input name="uniq_texts_descr" class="form-control" type="text" value="@isset($settings->main_description){{ $settings->uniq_texts_descr }} @endisset" required>
                                         </div>
                                     </div>
                                     <div class="card-footer text-muted">

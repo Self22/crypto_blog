@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Category;
+use App\UniqText;
 use App\Tag;
 use App\Settings;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
+use DB;
 
 class PostsController extends Controller
 {
@@ -27,7 +29,7 @@ class PostsController extends Controller
         $description = Settings::find(1)->main_description;
         // $posts = Post::simplePaginate(10);
 
-            return view('blog.index')->withPosts($posts)->withTitle($title)->withDescription($description)->withH1($main_h1);
+            return view('blog.expert')->withPosts($posts)->withTitle($title)->withDescription($description)->withH1($main_h1);
 
 
 
@@ -44,19 +46,33 @@ class PostsController extends Controller
         return view('blog.show')->withPost($post)->withTags($tags)->withTitle($title)->withDescription($description);
     }
 
-    public function filter_cat($id){
-        $posts = Category::find($id)->posts()->paginate(15);
-        $category = Category::find($id)->name;
-        $title = Category::find($id)->title_page;
-
-        return view('blog.index')->withPosts($posts)->withCategory($category)->withTitle($title);
+    public function filter_cat($slug){
+        $category = Category::where('slug', $slug)->get();
+        foreach ($category as $cat){
+            $category = $cat->name;
+            $title = $cat->title_page;
+            $description = $cat->description;
+            $posts = Category::find($cat->id)->uniqtexts()->paginate(15);
+            return view('blog.index')->withPosts($posts)->withCategory($category)->withTitle($title)->withDescription($description);
+        }
+//        $category = $category->name;
+//        $title = $category['title_page'];
+//        $description = $category['description'];
+//         $posts = Category::where('slug', $slug)->uniqtexts()->paginate(15);
+////
+//        return view('blog.index')->withPosts($posts)->withCategory($category)->withTitle($title)->withDescription($description);
     }
 
     public function filter_tag($id){
-        $posts = Tag::find($id)->posts()->paginate(15);
+        $experts = Tag::find($id)->posts()->paginate(30);
+        $uniques = Tag::find($id)->uniqTexts()->paginate(40);
+
+        $merged = $uniques->merge($experts);
+        $allPosts = $merged->all();
         $name = Tag::find($id)->tag;
-        $title = Settings::find(1)->main_title;
-        return view('blog.index')->withPosts($posts)->withName($name)->withTitle($title);
+        $title =  Tag::find($id)->title;
+        $description = Tag::find($id)->description;
+        return view('blog.index')->withPosts($allPosts)->withName($name)->withTitle($title)->withDescription($description);
 
     }
 }

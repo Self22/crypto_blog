@@ -12,15 +12,28 @@
 */
 /// test routes
 
-Route::get('test', 'ParseController@index');
+Route::get('test2', 'ParseController@test2');
+Route::get('test3', 'ParseController@test3');
+Route::get('test4', 'UniqueController@test4');
+Route::get('test5', 'UniqueController@test5');
+Route::get('test6', 'UniqueController@test6');
+Route::get('clean', 'UniqueController@clean');
+Route::get('images', 'UniqueController@add_images_to_database');
+Route::get('video', 'UniqueController@add_video_to_database');
+
+
+
+
 
 
 /// user routes
 
-Route::get('/', 'PostsController@index')->name('blog');
+Route::get('/expert_articles', 'PostsController@index')->name('blog');
 Route::get('blog.show/{slug}', 'PostsController@show')->name('blog.show');
-Route::get('category.filter/{id}', 'PostsController@filter_cat')->name('category.filter');
+Route::get('category/{slug}', 'PostsController@filter_cat')->name('category.filter');
 Route::get('tag.filter/{id}', 'PostsController@filter_tag')->name('tag.filter');
+Route::get('/', 'UniqueController@index')->name('main');
+Route::get('/theme_news/{slug}', 'UniqueController@show')->name('news.show');
 
 // Admin
 //
@@ -28,6 +41,7 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
     Route::get('admin', 'Admin\DashboardController@index')->name('admin');
     Route::resource('posts', 'Admin\PostsController');
+    Route::resource('uniq_texts', 'Admin\UniqTextsController');
     Route::resource('categories', 'Admin\CategoriesController');
     Route::resource('tags', 'Admin\TagsController');
     Route::get('settings', 'Admin\SettingsController@edit')->name('settings');
@@ -39,4 +53,6 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::fallback(function(){
+    return response()->view('errors.404');
+});

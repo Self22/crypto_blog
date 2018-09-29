@@ -9,7 +9,6 @@
   <meta name="keyword" content="Bootstrap,Admin,Template">
   <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}">
   <title>Admin Template</title>
-
   <!-- Icons -->
   <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
   <link href="{{ asset('css/simple-line-icons.css') }}" rel="stylesheet">

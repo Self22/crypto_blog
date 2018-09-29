@@ -163,6 +163,7 @@ return [
         App\Providers\BreadcrumsServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Yangqi\Htmldom\HtmldomServiceProvider::class,
+        App\Providers\SrintaxServiceProvider::class,
 
     ],
 
@@ -215,6 +216,7 @@ return [
         'Breadcrumbs' => App\Helpers\Facades\Breadcrumbs::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Htmldom' => Yangqi\Htmldom\Htmldom::class,
+        'Spintax' => App\Helpers\Spintax\Spintax::class,
 
     ],
 

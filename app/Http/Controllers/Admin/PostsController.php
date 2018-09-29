@@ -9,6 +9,7 @@ use App\Post;
 use App\Category;
 use App\Tag;
 use Image;
+use Illuminate\Support\Facades\Input;
 
 use Illuminate\Support\Facades\Gate;
 
@@ -58,7 +59,7 @@ class PostsController extends Controller
          $post->title = $request->title;
          $post->content = $request->content;
          $post->category_id = $request->category_id;
-        $post->seo_title = $request->seo_title.'| HG.IO';
+        $post->seo_title = $request->seo_title;
          $post->is_active = $request->is_active;
         $post->description = stristr($request->content, '.', true);
 
@@ -79,12 +80,17 @@ class PostsController extends Controller
             ]);
 
             $filename = str_replace(' ', '', $_FILES['image']['name']);
+
             if(Post::where('picture_name', $filename)->exists()){
                 $filename = time().$filename;
             }
+
             $post->picture_name = 'img/'.$filename;
 
-            Image::make($request->file('image'))->save( public_path('img/'. $filename));
+//            $img = Image::make($_FILES['image']['tmp_name']);
+            Image::make(Input::file('image'))->save( public_path('img/'. $filename));
+
+//            Image::make($request->file('image'))->save( public_path('img/'. $filename));
 
 
         }
@@ -96,21 +102,7 @@ class PostsController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $post = Post::find($id);
-        $tags = $post->tags;
-        $category = Category::find($post->category_id);
 
-        $category = $category->name;
-        return view('admin.posts.show')->withPost($post)->withTags($tags)->withCategory($category);
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -155,7 +147,7 @@ class PostsController extends Controller
             }
             $post->picture_name = 'img/'.$filename;
 
-            Image::make($request->file('image'))->resize(300, 300)->save( public_path('img/'. $filename));
+            Image::make(Input::file('image'))->save( public_path('img/'. $filename));
 
 
         }

@@ -38,6 +38,14 @@
                                         <label for="title">Name</label>
                                         <input name="tag" class="form-control" type="text" value="" required>
                                     </div>
+                                    <div class="form-group">
+                                        <label for="title">Page Title</label>
+                                        <input name="title" class="form-control" type="text" value="" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="description">Description</label>
+                                        <input name="description" class="form-control" type="text" value="" required>
+                                    </div>
 
                                 </div>
                                 <div class="card-footer text-muted">

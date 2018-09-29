@@ -10,8 +10,9 @@
     @isset($description)
     <meta name="description" content="{{ $description }}">
     @endisset
+    <link rel="icon" type="image/x-icon" href="{{url('/img/favicon.png')}}">
 
-    <title>{{ $title }}</title>
+    <title>{{ $title }} | HG.IO</title>
 
 
 

@@ -8,7 +8,12 @@ use DB;
 
 class ParseController extends Controller
 {
-    public function index(){
+
+    public function test2(){
         ParseLink::parse_cryptonews();
+    }
+
+    public function test3(){
+        ParseLink::parse_coindesk();
     }
 }

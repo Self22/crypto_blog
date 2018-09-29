@@ -43,6 +43,7 @@ class CategoriesController extends Controller
 
         $category->name = $request->name;
         $category->title_page = $request->title_page;
+        $category->description = $request->description;
         $category->save();
         
         return redirect(route('categories.index'));
@@ -87,6 +88,7 @@ class CategoriesController extends Controller
         
         $category->name = $request->input('name');
         $category->title_page = $request->input('title_page');
+        $category->description = $request->input('description');
         $category->save();
 
         return redirect(route('categories.index'));

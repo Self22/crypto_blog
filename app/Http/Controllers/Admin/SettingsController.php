@@ -77,6 +77,9 @@ class SettingsController extends Controller
         $settings->main_title = $request->main_title;
         $settings->main_h1 = $request->main_h1;
         $settings->main_description = $request->main_description;
+        $settings->uniq_texts_title = $request->uniq_texts_title;
+        $settings->uniq_texts_h1 = $request->uniq_texts_h1;
+        $settings->uniq_texts_descr = $request->uniq_texts_descr;
         $settings->save();
         return redirect()->route('settings');
     }

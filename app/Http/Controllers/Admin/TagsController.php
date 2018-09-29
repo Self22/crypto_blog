@@ -45,6 +45,8 @@ class TagsController extends Controller
     {
         $tag = new Tag;
         $tag->tag = $request->tag;
+        $tag->title = $request->title;
+        $tag->description = $request->description;
         $tag->save();
         return redirect(route('tags.index'))->with('message', 'An tag has been added');
     }
@@ -85,6 +87,8 @@ class TagsController extends Controller
     {
         $tag = Tag::find($id);
         $tag->tag = $request->input('tag');
+        $tag->title = $request->input('title');
+        $tag->description = $request->input('description');
         $tag->save();
         return redirect(route('tags.index'))->with('message', 'An tag has been updated');
     }
