@@ -1,14 +1,26 @@
 <?php
 
 namespace App;
-
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 
 class Tag extends Model
 {
+    use Sluggable;
+
     protected $fillable = [
-        'tag', 'title_page', 'description'
+        'tag', 'slug', 'title', 'description'
     ];
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'tag'
+            ]
+        ];
+    }
+
 
     public function posts()
     {

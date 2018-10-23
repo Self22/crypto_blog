@@ -63,15 +63,16 @@ class PostsController extends Controller
 //        return view('blog.index')->withPosts($posts)->withCategory($category)->withTitle($title)->withDescription($description);
     }
 
-    public function filter_tag($id){
-        $experts = Tag::find($id)->posts()->paginate(30);
-        $uniques = Tag::find($id)->uniqTexts()->paginate(40);
+    public function filter_tag($slug){
+        $experts = Tag::where('slug', $slug)->first()->posts()->paginate(30);
+        $uniques = Tag::where('slug', $slug)->first()->uniqTexts()->paginate(40);
 
         $merged = $uniques->merge($experts);
         $allPosts = $merged->all();
-        $name = Tag::find($id)->tag;
-        $title =  Tag::find($id)->title;
-        $description = Tag::find($id)->description;
+        $tag = Tag::where('slug', $slug)->first();
+        $name = $tag->tag;
+        $title =  $tag->title;
+        $description = $tag->description;
         return view('blog.index')->withPosts($allPosts)->withName($name)->withTitle($title)->withDescription($description);
 
     }

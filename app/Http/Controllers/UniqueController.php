@@ -6,6 +6,7 @@ use App\Image;
 use App\Uniq_Video;
 use App\UniqText;
 use App\Settings;
+use App\Category;
 use Illuminate\Http\Request;
 
 class UniqueController extends Controller
@@ -23,9 +24,11 @@ class UniqueController extends Controller
 
     public function show($slug){
         $article = UniqText::whereSlug($slug)->firstOrFail();
+        $category = Category::where('id', $article->category_id)->firstOrFail();
         $title = strip_tags($article->anchor);
         $description = $article->description;
-        return view('blog.show')->withArticle($article)->withTitle($title)->withDescription($description);
+//        var_dump($category);
+        return view('blog.show')->withArticle($article)->withTitle($title)->withDescription($description)->withCategory($category);
     }
 
     public function test4(){

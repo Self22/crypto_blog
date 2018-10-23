@@ -229,6 +229,18 @@ class ParseLink extends Model
         }
     }
 
+    public static function clean_parse_text(){
+        $texts = ParseLink::all(['id', 'news_text']);
+        foreach ($texts as $text){
+            $raw = $text->news_text;
+            $raw = htmlspecialchars_decode($raw);
+            $newText = ParseLink::find($text->id);
+            $newText->news_text = $raw;
+            $newText->save();
+
+        }
+    }
+
 
 
 //    public static function parse_cointelegraph()

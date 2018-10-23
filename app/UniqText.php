@@ -135,6 +135,8 @@ class UniqText extends Model
         $article->original_link = $originalLink;
         $article->save();
 
+
+        // присваиваем случайный тэги
         $allTags = Tag::all()->pluck('id');
         $tagNum = rand(1, $allTags->count());
         $articleTags = [];
@@ -144,7 +146,7 @@ class UniqText extends Model
         $article->tags()->sync($articleTags, false);
     }
 
-    public static function clean_text(){
+    public static function clean_uniq_text(){
         $texts = UniqText::all(['id', 'news_text']);
         foreach ($texts as $text){
             $raw = $text->news_text;

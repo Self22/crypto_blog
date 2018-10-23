@@ -16,4 +16,8 @@ class ParseController extends Controller
     public function test3(){
         ParseLink::parse_coindesk();
     }
+
+    public function clean_parse(){
+        ParseLink::clean_parse_text();
+    }
 }

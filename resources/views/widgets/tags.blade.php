@@ -9,7 +9,7 @@
                         @foreach($data as $item)
                             @if($loop->iteration  % 2 == 0)
                                 <li>
-                                    <a href="{{ route('tag.filter', ['id'=> $item->id]) }}">{{ $item->tag }}</a>
+                                    <a href="{{ route('tag.filter', ['id'=> $item->slug]) }}">{{ $item->tag }}</a>
                                 </li>
                             @endif
                         @endforeach
@@ -21,7 +21,7 @@
                         @foreach($data as $item)
                             @if($loop->iteration  % 2 != 0)
                                 <li>
-                                    <a href="{{ route('tag.filter', ['id'=> $item->id]) }}">{{ $item->tag }}</a>
+                                    <a href="{{ route('tag.filter', ['id'=> $item->slug]) }}">{{ $item->tag }}</a>
                                 </li>
                             @endif
                         @endforeach

@@ -21,7 +21,14 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
     <link href="/css/styles.css" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    @endsection
+    @isset($article)
+        <link rel="canonical" href="https://hashgame.io/theme_news/{{$article->slug}}">
+    @endisset
+    @isset($post)
+        <link rel="canonical" href="http://hashgame/blog.show/{{$post->slug}}">
+    @endisset
+
+@endsection
 
 
 

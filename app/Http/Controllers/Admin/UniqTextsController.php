@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\UniqText;
+use DB;
 
 class UniqTextsController extends Controller
 {
@@ -15,7 +16,7 @@ class UniqTextsController extends Controller
      */
     public function index()
     {
-        $posts = UniqText::paginate(10);
+        $posts = DB::table('uniq_texts')->orderBy('id', 'desc')->paginate(15);
 
         return view('admin.uniq_texts.index')
             ->with('posts', $posts);
@@ -92,6 +93,12 @@ class UniqTextsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = UniqText::find($id);
+        if($post->tags()){
+            $post->tags()->detach();
+        }
+        $post->delete();
+
+        return redirect(route('uniq_texts.index'))->with('message', 'An article has been deleted');
     }
 }
