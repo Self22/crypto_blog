@@ -4,6 +4,7 @@ namespace App\Console;
 
 use App\ParseLink;
 use App\UniqText;
+use App\Settings;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -41,6 +42,10 @@ class Kernel extends ConsoleKernel
         $schedule->call(function () {
             UniqText::create_uniq_news();
         })->hourly();
+
+        $schedule->call(function () {
+            Settings::createSitemap();
+        })->daily();
 
 
     }

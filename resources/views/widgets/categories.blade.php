@@ -1,6 +1,6 @@
 <!-- Categories Widget -->
 @if($data)
-<div class="card my-4">
+<div class="card my-4 categories_sidebar-widget">
   <p class="widget-header">Categories</p>
     <div class="card-body">
       <div class="row">

@@ -10,6 +10,7 @@ use App\Category;
 use App\Tag;
 use Image;
 use Illuminate\Support\Facades\Input;
+use Spatie\Sitemap\SitemapGenerator;
 
 use Illuminate\Support\Facades\Gate;
 

@@ -12,6 +12,23 @@
     @endisset
     <link rel="icon" type="image/x-icon" href="{{url('/img/favicon.png')}}">
 
+
+
+
+    @isset($_GET["page"])
+        @if($_GET["page"]>1)
+            <link rel="next" href="https://hashgame.io/?page={{$_GET["page"]-1}}">
+            <link rel="prev" href="https://hashgame.io/?page={{$_GET["page"]+1}}">
+        @else
+            <link rel="next" href="https://hashgame.io/?page=2">
+        @endif
+    @endisset
+
+    @empty($_GET["page"])
+        <link rel="next" href="https://hashgame.io/?page=2">
+    @endempty
+
+
     <title>{{ $title }} | HG.IO</title>
 
 

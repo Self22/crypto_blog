@@ -1,6 +1,10 @@
+@php
+    header("HTTP/1.0 404 Not Found");
+@endphp
 <html>
 <head>
     <link href='//fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
+
 
     <style>
         body {

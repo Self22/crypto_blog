@@ -8,6 +8,7 @@
     "php": ">=7.1.3",
     "creativeorange/gravatar": "^1.0",
     "cviebrock/eloquent-sluggable": "^4.5",
+    "danbovey/laravel-linkheader-paginator": "^1.0",
     "doctrine/dbal": "^2.6",
     "fideloper/proxy": "~4.0",
     "google/recaptcha": "^1.1",
@@ -18,6 +19,8 @@
     "laravel/tinker": "~1.0",
     "laravelcollective/html": "^5.4.0",
     "rap2hpoutre/laravel-log-viewer": "^0.12.0",
+    "spatie/laravel-paginateroute": "^2.7",
+    "spatie/laravel-sitemap": "^5.2",
     "yangqi/htmldom": "1.0.*"
   },
   "require-dev": {

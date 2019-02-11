@@ -29,12 +29,11 @@ class PostsController extends Controller
         $description = Settings::find(1)->main_description;
         // $posts = Post::simplePaginate(10);
 
-            return view('blog.expert')->withPosts($posts)->withTitle($title)->withDescription($description)->withH1($main_h1);
-
-
-
-
-
+            return view('blog.expert')
+                ->withPosts($posts)
+                ->withTitle($title)
+                ->withDescription($description)
+                ->withH1($main_h1);
     }
 
     public function show($slug)

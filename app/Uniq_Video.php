@@ -9,7 +9,7 @@ class Uniq_Video extends Model
     public static function add_video_to_database(){
         $raw_video = file_get_contents('../resources/video_raw/video.txt');
 //        echo($raw_video);
-        $video_arr = explode(',', $raw_video);
+        $video_arr = explode(PHP_EOL, $raw_video);
         print_r($video_arr);
         echo '<br><hr>';
 

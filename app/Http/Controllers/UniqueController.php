@@ -8,6 +8,8 @@ use App\UniqText;
 use App\Settings;
 use App\Category;
 use Illuminate\Http\Request;
+use App\Providers\SeoPaginationElementHelper;
+use DanBovey\LinkHeaderPaginator\LengthAwarePaginator;
 
 class UniqueController extends Controller
 {
@@ -45,7 +47,11 @@ class UniqueController extends Controller
     }
 
     public function clean(){
-        UniqText::clean_text();
+        UniqText::clean_uniq_text();
+    }
+
+    public function repair(){
+        UniqText::repair_uniq_text();
     }
 
 
@@ -55,6 +61,10 @@ class UniqueController extends Controller
 
     public function add_video_to_database(){
         Uniq_Video::add_video_to_database();
+    }
+
+    public function sanitize(){
+        UniqText::deleteBadParse();
     }
 
 

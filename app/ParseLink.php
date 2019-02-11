@@ -56,7 +56,15 @@ class ParseLink extends Model
         $link->site = $site;
         $link->category = $category;
         $link->tag = $tag;
+
+        /// чистим текст
+        $news_text = preg_replace("#[^[:alnum:][:punct:][:blank:]]+#","", $news_text);
+        $news_text = str_replace(', ,', ',', $news_text);
+        $news_text = htmlspecialchars_decode($news_text);
+        $news_text = iconv('ASCII', 'UTF-8//IGNORE', $news_text);
         $link->news_text = $news_text;
+
+
         $link->description = html_entity_decode(html_entity_decode($description));
         $link->img_preview = $img;
         $link->date = ParseLink::getDateAttribute();
@@ -70,11 +78,12 @@ class ParseLink extends Model
     {
 
         $html_news = new \Htmldom('https://www.coindesk.com/');
-        $links = $html_news->find('a.fade');
+        $links = $html_news->find('a.stream-article');
 
         // Зайти в цикле в кадый линк, вытащить, очистить и сохранить текст новости
         foreach ($links as $element) {
-            $anchor = strip_tags($element->innertext);
+            $anchorH3 = $element->find('h3', 0);
+            $anchor = $anchorH3->innertext;
             $href = $element->href;
 
             if(!$href){
@@ -101,6 +110,7 @@ class ParseLink extends Model
             $rand_p = rand(2, $count_e);
 
             foreach ($e as $key=>$live) {
+
                 $live->style = null;
                 $live->class = null;
                 $live = preg_replace("!<a[^>]*>(.*?)</a>!si", "\\1", $live);
@@ -111,7 +121,6 @@ class ParseLink extends Model
                 $live = preg_replace("'<em[^>]*?>.*?</em>'si", "", $live);
                 $live = preg_replace("'<label[^>]*?>.*?</label>'si", "", $live);
                 $live = preg_replace("'<iframe[^>]*?>.*?</iframe>'si", "", $live);
-                $live = preg_replace("'Sign up for Blockchain Bites and CoinDesk Weekly, sent Sunday-Friday. By Registering, you agree to the terms and conditions and privacy policy'", '', $live);
                 $live = ucfirst($live);
                 /*   $live = preg_replace("'<b[^>]*?>.*?</b>'si","",$live);*/
 
@@ -150,6 +159,8 @@ class ParseLink extends Model
             }
 
             $final_text = $anchor.'. Kcoin '.$description.'. Kcoin '.$final_text;
+
+
 
             ParseLink::save_link($href, $anchor, $description, 'coindesk.com', 'news', $final_text, $imgPreview);
         }

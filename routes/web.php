@@ -18,9 +18,12 @@ Route::get('test4', 'UniqueController@test4');
 Route::get('test5', 'UniqueController@test5');
 Route::get('test6', 'UniqueController@test6');
 Route::get('clean', 'UniqueController@clean');
+Route::get('repair', 'UniqueController@repair');
+Route::get('sanitize', 'UniqueController@sanitize');
 Route::get('clean_parse', 'ParseController@clean_parse');
 Route::get('images', 'UniqueController@add_images_to_database');
 Route::get('video', 'UniqueController@add_video_to_database');
+Route::get('createsitemap', 'ParseController@createSitemap');
 
 
 
@@ -55,5 +58,5 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 Route::fallback(function(){
-    return response()->view('errors.404');
+    return response()->view('errors.404', [], 404);
 });

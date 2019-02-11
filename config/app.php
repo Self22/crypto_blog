@@ -147,6 +147,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
+
         /*
          * Package Service Providers...
          */
@@ -164,6 +165,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Yangqi\Htmldom\HtmldomServiceProvider::class,
         App\Providers\SrintaxServiceProvider::class,
+
 
     ],
 
@@ -217,6 +219,7 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'Htmldom' => Yangqi\Htmldom\Htmldom::class,
         'Spintax' => App\Helpers\Spintax\Spintax::class,
+
 
     ],
 

@@ -15,6 +15,7 @@ class UniqText extends Model
 {
     use Sluggable;
 
+
     protected $fillable = ['anchor', 'category', 'tag', 'time', 'date', 'news_text', 'slug', 'description'];
 
     public function category()
@@ -56,11 +57,14 @@ class UniqText extends Model
         ];
     }
 
-    private static function wordai_api($text, $quality, $email = 'evaturned@gmail.com', $pass = '24562456zh')
+    private static function wordai_api($text, $quality, $email = 'accounts@seo.partners', $pass = 'TSv6VH6}')
 
     {
 
-        if (isset($text) && isset($quality) && isset($email) && isset($pass)) {
+//        $email = env('WORDAI_EMAIL');
+//        $pass = env('WORDAI_PASS');
+
+        if (isset($text) && isset($quality)) {
 
             $text = urlencode($text);
 
@@ -94,20 +98,36 @@ class UniqText extends Model
         $img = $example->img_preview;
         $originalLink = $example->id;
 
-        $uniqText = UniqText::wordai_api($example->news_text, 'Very Unique');
+//        echo ($originalLink);
+
+        $uniqText = UniqText::wordai_api(htmlspecialchars_decode($example->news_text), 'Very Unique');
         $allText = json_decode($uniqText, true);
+
+        if(empty($allText['text'])){
+            $example->delete;
+            return;
+        }
         $uniqTextArray = explode('Kcoin', $allText["text"]);
-//        print_r($uniqTextArray);
+//        print_r($allText);
         $anchor =  $uniqTextArray[0];
         $description =  $uniqTextArray[1];
         $text =  $uniqTextArray[2];
+
+        if(strlen($text) < 1500){
+            $example->uniqued = 1;
+            $example->save();
+            return;
+        }
 //
 //        echo $anchor.'<br>'.$description.'<br>'.$text;
         // обрабатываем спинтакс
         $spin = new Spintax;
         $anchor = strip_tags($spin->process($anchor));
+//        echo($anchor);
         $text = $spin->process($text);
+//        echo($text);
         $description = $spin->process($description);
+//        echo($description);
 
 //         // сохраняем статью
         UniqText::save_uniq_text($anchor, $text, $description, $img, $originalLink);
@@ -116,17 +136,28 @@ class UniqText extends Model
         $example->save();
     }
 
+
+
+
     private static function save_uniq_text($anchor, $news_text, $description, $img, $originalLink){
         if (UniqText::where('anchor', $anchor)->exists()) {
             return;
         }
 
         $article = new UniqText;
-        $article->anchor = trim(html_entity_decode($anchor));
+        $rawAnchor = str_replace('{', '', $anchor);
+        $rawAnchor = str_replace('}', '', $rawAnchor);
+        $rawAnchor = str_replace('|', '', $rawAnchor);
+        $article->anchor = trim(html_entity_decode($rawAnchor));
         $article->category_id = rand(1, self::getCategoriesCount());
         $article->tag = rand(1, self::getTagsCount());
-        $raw = str_replace('"', '', $news_text);
-        $raw = str_replace('--', '-', $raw);
+        $rawText = str_replace('"', '', $news_text);
+        $rawText = str_replace('--', '-', $rawText);
+        $rawText = str_replace('{', '', $rawText);
+        $rawText = str_replace('}', '', $rawText);
+        $rawText = preg_replace('/__+/', '_', $rawText);
+        $rawText = preg_replace('/<br>\s*.\s*/', '', $rawText);
+        $news_text = str_replace('|', '', $rawText);
         $article->news_text = $news_text;
         $article->img_preview =  $img;
         $article->description = strip_tags($description);
@@ -147,7 +178,17 @@ class UniqText extends Model
     }
 
     public static function clean_uniq_text(){
-        $texts = UniqText::all(['id', 'news_text']);
+        $texts = UniqText::all();
+
+
+//        foreach ($texts as $text){
+//            $raw = $text->description;
+//            $raw = htmlspecialchars_decode($raw);
+//            $newText = UniqText::find($text->id);
+//            $newText->description = $raw;
+//            $newText->save();
+//        }
+
         foreach ($texts as $text){
             $raw = $text->news_text;
             $raw = str_replace('"', '', $raw);
@@ -156,12 +197,39 @@ class UniqText extends Model
             $raw = str_replace('{', '', $raw);
             $raw = str_replace('}', '', $raw);
             $raw = preg_replace('/<input(?:\\s[^<>]*)?>/i', '', $raw);
-            $raw = preg_replace("'Sign up for Blockchain Bites and CoinDesk Weekly, sent Sunday-Friday. By Registering, you agree to the terms and conditions and privacy policy'", '', $raw);
+            $raw = preg_replace('/__+/', '_', $raw);
+            $raw = preg_replace('/<br>\s*.\s*/', '', $raw);
             $newText = UniqText::find($text->id);
             $newText->news_text = $raw;
             $newText->save();
 
         }
+
+//        foreach ($texts as $text){
+//            $raw = $text->anchor;
+//            $raw = str_replace('"', '', $raw);
+//            $raw = str_replace('--', '-', $raw);
+//            $raw = str_replace('<p></p>', '', $raw);
+//            $raw = str_replace('{', '', $raw);
+//            $raw = str_replace('}', '', $raw);
+//            $newText = UniqText::find($text->id);
+//            $newText->anchor = $raw;
+//            $newText->save();
+//
+//        }
+//
+//        foreach ($texts as $text){
+//            $raw = $text->description;
+//            $raw = str_replace('"', '', $raw);
+//            $raw = str_replace('--', '-', $raw);
+//            $raw = str_replace('<p></p>', '', $raw);
+//            $raw = str_replace('{', '', $raw);
+//            $raw = str_replace('}', '', $raw);
+//            $newText = UniqText::find($text->id);
+//            $newText->description = $raw;
+//            $newText->save();
+//
+//        }
     }
 
     public static function addTagsAndCategoriesToArticles(){
@@ -186,7 +254,7 @@ class UniqText extends Model
     }
 
     public static function test_wordai(){
-        function api($text, $quality, $email = 'evaturned@gmail.com', $pass = '24562456zh')
+        function api($text, $quality, $email = 'accounts@seo.partners', $pass = 'TSv6VH6}')
 
         {
 
@@ -228,6 +296,42 @@ class UniqText extends Model
 
     }
 
+    public static function repair_uniq_text()
+    {
+        $texts = UniqText::all(['id', 'anchor']);
+
+        foreach ($texts as $text){
+            $id = $text->id;
+
+            if(ParseLink::find($id)){
+                $original = ParseLink::find($id);
+
+                if($original->anchor){
+                    $originalAnchor = $original->anchor;
+                }
+                else{
+                    continue;
+                }
+
+                if($original->description){
+                    $originalDescr = $original->description;
+                }
+                else{
+                    continue;
+                }
+
+                $text->anchor = $originalAnchor;
+                $text->description = $originalDescr;
+                $text->save();
+            }
+            else{
+                continue;
+            }
+        }
+
+    }
+
+   
 
 
 
